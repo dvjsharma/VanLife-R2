@@ -69,6 +69,7 @@ header a:hover {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100vh;
   min-height: 350px;
   color: white;
   padding: 45px 23px;
@@ -236,10 +237,6 @@ i[class*='van-type-'] {
   text-decoration: none;
 }
 
-.van-detail-container .back-button:visited {
-  
-}
-
 .van-detail-container .back-button span {
   text-decoration: underline;
 }
@@ -278,4 +275,48 @@ i[class*='van-type-'] {
   background-color: #FF8C38;
   color: white;
   font-size: 1.125rem;
+}
+/*  layout 2 navigation */
+
+a.nav-active{
+  font-weight: bold;
+  text-decoration: underline;
+  color: #161616;
+}
+.host-nav {
+  display: flex;
+}
+
+.host-nav a {
+  text-decoration: none;
+  color: #4D4D4D;
+  font-weight: 500;
+  padding: 5px 20px;
+}
+
+.host-nav a:hover {
+  color: #161616;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/*** Footer ***/
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  margin-bottom: 84px;
+}
+footer {
+  background-color: #161616;
+  color: #AAAAAA;
+  height: 74px;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  font-weight: 500;
 }

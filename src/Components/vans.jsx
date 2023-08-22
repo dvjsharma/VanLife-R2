@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import VanCard from "./vanCard";
 
 export default function Vans(){
-    const [VansData, setVansData]=useState([])  //initial state
-    useEffect(()=>{   //api call
+    const [VansData, setVansData]=useState([]) 
+    useEffect(()=>{
         const temp=fetch("/api/vans")
         .then(res => res.json())
         .then(val=> setVansData(val.vans))
