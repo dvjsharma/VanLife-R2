@@ -6,7 +6,7 @@ import Navbar from './Components/navbar';
 import Home from './Components/home';
 import Test from './Components/test';
 import Vans from './Components/vans'
-//css
+import Van from './Components/van'
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/vans' element={<Vans/>} />
+        <Route path='/vans/:id' element={<Van/>} />
       </Routes>
     </>
   );
