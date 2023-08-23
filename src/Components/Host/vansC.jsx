@@ -46,7 +46,7 @@ export default function VanC(){
             >Photos</NavLink>
         </div>
         </nav>
-        <Outlet/>
+        <Outlet context={{Data}}/>
         </div>
         </>
     )
