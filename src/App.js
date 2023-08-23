@@ -12,6 +12,11 @@ import Dashboard from './Components/Host/dash'
 import Income from './Components/Host/income'
 import Reviews from './Components/Host/reviews'
 import Layout2 from './Components/Host/layout2'
+import VanList from './Components/Host/vanlist'
+import VanC from './Components/Host/vansC'
+import Details from './Components/Host/details';
+import Pricing from './Components/Host/pricing';
+import Photos from './Components/Host/photos';
 
 function App() {
   return (
@@ -26,6 +31,12 @@ function App() {
             <Route index element={<Dashboard/>} />
             <Route path='income' element={<Income/>} />
             <Route path='reviews' element={<Reviews/>} />
+            <Route path='vans' element={<VanList/>} />
+            <Route path='vans/:id' element={<VanC/>}>
+            <Route index element={<Details/>} />
+            <Route path='pricing' element={<Pricing/>} />
+            <Route path='photos' element={<Photos/>} />
+            </Route>
           </Route>
         </Route>
       </Routes>

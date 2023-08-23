@@ -11,7 +11,7 @@ export default function Vans(){
     const ToDisplay=VansData.map( data => <VanCard key={data.id} {...data}/>)
     if(ToDisplay.length===0){
         return(
-            <h1>Loading...</h1>
+            <h2 className="host-vans-list">Loading...</h2>
         )
     }
     return(
