@@ -10,8 +10,8 @@ export default function Van(){
         .then(res => res.json())
         .then(val => setvan(val.vans))
     },[param.id])
-    console.log(van);
-    console.log(param.id)
+    // console.log(van);
+    // console.log(param.id)
     return(
         <div className="van-detail-container">
             {van ? (

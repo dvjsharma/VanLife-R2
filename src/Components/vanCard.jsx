@@ -7,11 +7,11 @@ export default function VanCard({imageUrl, name, type, price, description, id}){
                <Link to={`${id}`}>
                     <img src={imageUrl} />
                     <h3>{name}</h3>
-                </Link> 
                 <div className="van-info">
                     <p>${price}<span>/day</span></p>
                 </div>
                 <i className={`van-type ${type} selected`}>{type}</i>
+                </Link> 
             </div>
     )
 }

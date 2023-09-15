@@ -33,9 +33,9 @@ function App() {
             <Route path='reviews' element={<Reviews/>} />
             <Route path='vans' element={<VanList/>} />
             <Route path='vans/:id' element={<VanC/>}>
-            <Route index element={<Details/>} />
-            <Route path='pricing' element={<Pricing/>} />
-            <Route path='photos' element={<Photos/>} />
+              <Route index element={<Details/>} />
+              <Route path='pricing' element={<Pricing/>} />
+              <Route path='photos' element={<Photos/>} />
             </Route>
           </Route>
         </Route>

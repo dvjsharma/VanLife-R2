@@ -1,3 +1,4 @@
+// a mirageJS server to handle shit out there
 import { createServer, Model } from "miragejs"
 
 
