@@ -1,4 +1,4 @@
-// a mirageJS server to handle shit out there
+// a mirageJS server to replicate shit out there
 import { createServer, Model } from "miragejs"
 
 
@@ -21,6 +21,8 @@ createServer({
         this.logging = false
 
         this.get("/vans", (schema, request) => {
+            //to replicate the "sad path"
+            // return new Response(400, {}, {Error: "Error fetching data"})
             return schema.vans.all()
         })
 

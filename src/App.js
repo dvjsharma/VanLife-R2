@@ -7,6 +7,7 @@ import Home from './Components/home';
 import Test from './Components/test';
 import Vans from './Components/vans'
 import Van from './Components/van'
+import Error from './Components/404error';
 //host
 import Dashboard from './Components/Host/dash'
 import Income from './Components/Host/income'
@@ -38,6 +39,7 @@ function App() {
               <Route path='photos' element={<Photos/>} />
             </Route>
           </Route>
+          <Route path='*' element={<Error/>} />
         </Route>
       </Routes>
     </>
