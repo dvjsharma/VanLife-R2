@@ -8,6 +8,7 @@ import Test from './Components/test';
 import Vans from './Components/vans'
 import Van from './Components/van'
 import Error from './Components/404error';
+import Login from './Components/login';
 //host
 import Dashboard from './Components/Host/dash'
 import Income from './Components/Host/income'
@@ -18,7 +19,6 @@ import VanC from './Components/Host/vansC'
 import Details from './Components/Host/details';
 import Pricing from './Components/Host/pricing';
 import Photos from './Components/Host/photos';
-
 function App() {
   return (
     <>
@@ -28,6 +28,7 @@ function App() {
           <Route path='about' element={<About/>} />
           <Route path='vans' element={<Vans/>} />
           <Route path='vans/:id' element={<Van/>} />
+          <Route path='login' element={<Login/>} />
           <Route path='host' element={<Layout2/>}>
             <Route index element={<Dashboard/>} />
             <Route path='income' element={<Income/>} />
