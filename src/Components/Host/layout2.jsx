@@ -16,7 +16,7 @@ export default function Layout2(){
     // }, [navigate]);
     //? way 2 of doing it
     const isLoggedIn=requireAuth();
-    if(!isLoggedIn){
+    if(isLoggedIn==="false"){
         return (<Navigate to="/login" state={{message: "You need to login first!"}} />)
     }
     //state is passed and accessed in login component, is check if its null or not and displayed accordingly

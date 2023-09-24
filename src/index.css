@@ -560,3 +560,22 @@ footer {
 .red-none{
   text-align: center;
 }
+.profile-img{
+  height: 20vh;
+  border-radius: 50%;
+  border: solid 3px black;
+}
+.email-host{
+  font-weight: bold;
+}
+.button-profile {
+  background-color: #FF8C38;
+  border: none;
+  border-radius: 9px;
+  height: 60px;
+  width: 200px;
+  margin-top: 22px;
+  color: white;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+}

@@ -1,29 +1,29 @@
 import React from "react"
-import { Navigate, useLocation} from "react-router-dom"
+import { Navigate, redirect, useLocation} from "react-router-dom"
 import { loginUser } from "../api"
-import { setSelectionRange } from "@testing-library/user-event/dist/utils"
-
+import userImg from "../Assets/images/profile.jpg"
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const [status, setStatus] = React.useState("idle")
     const [errorState, setErrorState]=React.useState(null)
     const [loginState, setLoginState]=React.useState(null)
     const [delayedNavigation, setDelayedNavigation] = React.useState(false);
-
     const val=useLocation()
     function handleSubmit(e) {
         e.preventDefault()
         setStatus("submitting")
         setErrorState(null)
-        setLoginState(null)
+        setLoginState(null) 
         loginUser(loginFormData)
             .then(data=>{
                 console.log(data)
                 setLoginState(data)
+                localStorage.setItem("UserAuth", true)
             })
             .catch(error => {
                 console.error("Error:", error); // Handle the error here
                 setErrorState(error)
+                localStorage.setItem("UserAuth", false)
             })
             .finally(()=>setStatus("idle"))
         //further you can use this data to do more st uff
@@ -36,6 +36,11 @@ export default function Login() {
             [name]: value
         }))
     }
+    function handelClick(){
+        localStorage.setItem("UserAuth", false)
+        window.location.reload()
+        console.log("redirecting...")
+    }
     React.useEffect(() => {
         if (loginState !== null) {
           const delay = setTimeout(() => {
@@ -44,6 +49,22 @@ export default function Login() {
           return () => clearTimeout(delay);
         }
       }, [loginState]);
+
+    if(localStorage.getItem("UserAuth")==="true" && loginState===null){
+        // localStorage.setItem("UserAuth", false)
+        const user=localStorage.getItem("username")
+        const email=localStorage.getItem("email")
+        return(
+            <div className="login-container">
+                <br /><br /><br />
+                <img src={userImg} alt="" className="profile-img"/>
+                <h1>{`${user}'s VanLife`}</h1>
+                <span className="email-host">{email}</span>
+                <br /> <br />
+                <button className="button-profile" onClick={()=>{handelClick()}}>Do you wish to Logout?</button>
+            </div>
+        )
+    }
 
     return (
         <div className="login-container">
@@ -67,6 +88,8 @@ export default function Login() {
                 {errorState===null? null :<h5 className="red">{errorState.message}</h5>}
                 {loginState===null? null :(
                     <>
+                    {localStorage.setItem("username", loginState.user.name )}
+                    {localStorage.setItem("email", loginState.user.email )}
                     <h5 className="red-none">Welcome {loginState.user.name}, redirecting you to host page..</h5>
                     {delayedNavigation && <Navigate to="/host"/>}
                     </>

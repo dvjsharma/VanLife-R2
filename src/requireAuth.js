@@ -1,6 +1,6 @@
 import React from "react";
 
 export function requireAuth(){
-    const isLoggedIn=false;
+    const isLoggedIn=localStorage.getItem("UserAuth")
     return isLoggedIn
 } 
