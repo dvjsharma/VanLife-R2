@@ -1,7 +1,7 @@
 import React from "react"
-import { Navigate, redirect, useLocation} from "react-router-dom"
+import { Navigate, useLocation} from "react-router-dom"
 import { loginUser } from "../api"
-import userImg from "../Assets/images/profile.jpg"
+import userImg from "../Assets/images/profile-general.png"
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const [status, setStatus] = React.useState("idle")

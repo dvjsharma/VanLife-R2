@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {Navigate, Outlet, useNavigate} from "react-router-dom";
+import React from "react";
+import {Navigate, Outlet} from "react-router-dom";
 import Navbar from "./navbar";
 import { requireAuth } from "../../requireAuth";
 
