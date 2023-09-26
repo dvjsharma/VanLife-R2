@@ -8,7 +8,8 @@ export default function Login() {
     const [errorState, setErrorState]=React.useState(null)
     const [loginState, setLoginState]=React.useState(null)
     const [delayedNavigation, setDelayedNavigation] = React.useState(false);
-    const val=useLocation()
+    const val=useLocation();
+    // console.log(val)
     function handleSubmit(e) {
         e.preventDefault()
         setStatus("submitting")
