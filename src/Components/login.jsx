@@ -2,13 +2,15 @@ import React from "react"
 import { Navigate, useLocation} from "react-router-dom"
 import { loginUser } from "../api"
 import userImg from "../Assets/images/profile-general.png"
+import useAuth from "../Context/useAuth"
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" }) //manage form data
     const [status, setStatus] = React.useState("idle") // login, logging in... status state
     const [errorState, setErrorState]=React.useState(null) //error state handeler if its not successfull
     const [loginState, setLoginState]=React.useState(null) //login state handeler if its successfull
     const [delayedNavigation, setDelayedNavigation] = React.useState(false); //to delay navigation by 1 sec
-    const val=useLocation();
+    const val=useLocation(); //to get that message "you need to login first"
+    const {userData, setuserData, isloggedin, setisloggedin} = useAuth() // to acces all auth global variables and methods
     // console.log(val)
     function handleSubmit(e) {
         e.preventDefault()
@@ -17,14 +19,18 @@ export default function Login() {
         setLoginState(null) 
         loginUser(loginFormData)
             .then(data=>{
-                console.log(data)
+                // console.log(data)
                 setLoginState(data)
-                localStorage.setItem("UserAuth", true)
+                setuserData(data)
+                setisloggedin(true)
+                // localStorage.setItem("UserAuth", true)
             })
             .catch(error => {
                 console.error("Error:", error); // Handle the error here
                 setErrorState(error)
-                localStorage.setItem("UserAuth", false)
+                setuserData(null)
+                setisloggedin(false)
+                // localStorage.setItem("UserAuth", false)
             })
             .finally(()=>setStatus("idle"))
         //further you can use this data to do more st uff
@@ -39,8 +45,10 @@ export default function Login() {
     }
     function handelClick(){
         localStorage.setItem("UserAuth", false)
-        window.location.reload()
-        console.log("redirecting...")
+        setuserData(null)
+        setisloggedin(false)
+        // window.location.reload()
+        // console.log("redirecting...")
     }
     React.useEffect(() => {
         if (loginState !== null) {
@@ -51,10 +59,10 @@ export default function Login() {
         }
       }, [loginState]);
 
-    if(localStorage.getItem("UserAuth")==="true" && loginState===null){
+    if(isloggedin===true && loginState===null){
         // localStorage.setItem("UserAuth", false)
-        const user=localStorage.getItem("username")
-        const email=localStorage.getItem("email")
+        const user=userData.user.name
+        const email=userData.user.email
         return(
             <div className="login-container">
                 <br /><br /><br />
@@ -92,9 +100,9 @@ export default function Login() {
                 {/* login state and message */}
                 {loginState===null? null :(
                     <>
-                    {localStorage.setItem("username", loginState.user.name )}
-                    {localStorage.setItem("email", loginState.user.email )}
-                    <h5 className="red-none">Welcome {loginState.user.name}, redirecting you to host page..</h5>
+                    {/* {localStorage.setItem("username", loginState.user.name )}
+                    {localStorage.setItem("email", loginState.user.email )} */}
+                    <h5 className="red-none">Welcome {userData.user.name}, redirecting you to host page..</h5>
                     {delayedNavigation && <Navigate to="/host"/>}
                     </>
                 )}
