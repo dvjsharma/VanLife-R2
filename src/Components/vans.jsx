@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import VanCard from "./vanCard";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import {getVans} from "../api";
 export default function Vans(){
-    //%useSearchParams hook : ignore if visiting for the first time (1)
 
+    //%useSearchParams hook : used to get the query string ?type=rugged when the component reloades, by default its ""
     const [SearchParam, setSearchParam]=useSearchParams();
-    const typeFilter=SearchParam.get("type");
+    const typeFilter=SearchParam.get("type"); //later set search param is defined which injects the word type so yk
 
     //%general stuff changed from a to b
 
-    const [VansData, setVansData]=useState([]) 
-    const [loaderState, setLoaderstate]=useState(false);
-    const [Error, setError]=useState(null);
+    const [VansData, setVansData]=useState([]) //vansdata to be displayed
+    const [loaderState, setLoaderstate]=useState(false); //loading... state
+    const [Error, setError]=useState(null);// error while fetching state
     //? a
     // useEffect(()=>{
     //     const temp=fetch("/api/vans")
@@ -20,7 +20,7 @@ export default function Vans(){
     //     .then(val=> setVansData(val.vans))
     // },[])
     //?b 
-    useEffect(()=>{
+    useEffect(()=>{ //async function cant be directly used because of useEffect
         const loader = async()=>{
             setLoaderstate(true)
             try{
@@ -38,15 +38,16 @@ export default function Vans(){
     },[]);
 
 
-    //filtering (2)
+    //? Filtering based on the searchParam query string, if null no filter is applied
     const FilteredArray = typeFilter? (VansData.filter(van => van.type===typeFilter)): (VansData)
 
-    const ToDisplay=FilteredArray.map( van => <VanCard key={van.id} {...van} typef={{search: `?${SearchParam.toString()}`}}/>)
-    if(ToDisplay.length===0){
+    const ToDisplay=FilteredArray.map( van => <VanCard key={van.id} {...van} typef={{search: `?${SearchParam.toString()}`}}/>) //complete {...van} is spread out, and typef object is passed to impliment back button functionality
+    if(ToDisplay.length===0){ //could also be handled by loadingstate
         return(
             <h2 className="host-vans-list">Loading...</h2>
         )
     }
+    //dont learn this code, copy pase it from pastebin paste @dvjsharma
     function handleFilterChange(key, value) {
         setSearchParam(prevParams => {
             if (value === null) {
@@ -61,7 +62,7 @@ export default function Vans(){
         onClick={() => handleFilterChange("type", null)}
         className="van-type clear-filters">Clear filter</button>
 
-    if(loaderState===true){
+    if(loaderState===true){ //oh well idk which one is being used now
         return <h1>Loading...</h1>
     }
     if(Error){
@@ -71,6 +72,7 @@ export default function Vans(){
         <div className="van-list-container">
             <h1>Explore our van options</h1>
             <div className="van-list-filter-buttons">
+                {/* this approach is not used because its hard coding string, my handle filterchange function is appending the string and keeping previous state intact */}
                 {/* <Link to="?type=simple" className="van-type simple">Simple</Link>
                 <Link to="?type=rugged" className="van-type rugged">Rugged</Link>
                 <Link to="?type=luxury" className="van-type luxury">Luxury</Link>

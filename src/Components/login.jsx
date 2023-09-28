@@ -3,11 +3,11 @@ import { Navigate, useLocation} from "react-router-dom"
 import { loginUser } from "../api"
 import userImg from "../Assets/images/profile-general.png"
 export default function Login() {
-    const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
-    const [status, setStatus] = React.useState("idle")
-    const [errorState, setErrorState]=React.useState(null)
-    const [loginState, setLoginState]=React.useState(null)
-    const [delayedNavigation, setDelayedNavigation] = React.useState(false);
+    const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" }) //manage form data
+    const [status, setStatus] = React.useState("idle") // login, logging in... status state
+    const [errorState, setErrorState]=React.useState(null) //error state handeler if its not successfull
+    const [loginState, setLoginState]=React.useState(null) //login state handeler if its successfull
+    const [delayedNavigation, setDelayedNavigation] = React.useState(false); //to delay navigation by 1 sec
     const val=useLocation();
     // console.log(val)
     function handleSubmit(e) {
@@ -85,8 +85,11 @@ export default function Login() {
                     placeholder="Password"
                     value={loginFormData.password}
                 />
-                {val.state===null? null :<h5 className="red">{val.state.message}</h5>}
+                {/* redirecting message is store in val object */}
+                {val.state===null? null :<h5 className="red">{val.state.message}</h5>} 
+                {/* error state and message */}
                 {errorState===null? null :<h5 className="red">{errorState.message}</h5>}
+                {/* login state and message */}
                 {loginState===null? null :(
                     <>
                     {localStorage.setItem("username", loginState.user.name )}

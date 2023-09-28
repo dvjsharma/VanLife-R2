@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -10,11 +9,11 @@ export default function Van(){
         fetch(`/api/vans/${param.id}`)
         .then(res => res.json())
         .then(val => setvan(val.vans))
-    },[param.id])
+    },[param.id]) //depandency, change van when id changes
     // console.log(van);
-    // console.log(param.id)s
+    // console.log(param.id)
 
-    //for round 2
+    //? This is how you get the state value passed from parent component using the useloaction hook
     const stateFilter= useLocation();
     // console.log(stateFilter) //gives loads of handy functions 
     const filter=(stateFilter.state.search==="?" ? "" : stateFilter.state.search)
@@ -26,8 +25,8 @@ export default function Van(){
             {van ? (
             <>
                 <Link
-                to={`..${filter}`}
-                relative="path"
+                to={`..${filter}`} //here prvious page is athe route pageccessed with same query string even if it dosent exist in 
+                relative="path" //to prevent from going back to the parent but to the closest route
                 className="back-button"
                 >&larr; <span>Back to {filter==="" ? "all" : van.type} vans</span></Link>
 

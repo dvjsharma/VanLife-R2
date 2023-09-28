@@ -26,3 +26,5 @@ export default function Navbar(){
         </header>
     )
 }
+
+//? Here destructuring is used to get the isActive property from the props object, since the event is an object the object is straight away desteructured to get the isActive property. If the event has more than one prop, still it woild work as same name prop would get same value
