@@ -1,8 +1,37 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import imageUrl from "../Assets/images/person-circle.svg"
+import useAuth from "../Context/useAuth";
 
 export default function Navbar(){
+    const {isloggedin} =useAuth()
+    const navigate=useNavigate()
+    // const [pathVal, setpathVal]=useState("login")
+    // useEffect(()=>{
+    //     if(pathVal==="login" && isloggedin){
+    //         setpathVal("profile")
+    //     }
+    //     else{
+    //         setpathVal("login")
+    //     }
+    // },[])
+    // console.log(isloggedin)
+    // function decider(){ //? no need of useEffect cause isloggedin change will cause re-render and hence the function will be called again
+    //     if(!isloggedin){
+    //         return "/login"
+    //     }
+    //     else{
+    //         return "/profile"
+    //     }
+    // }
+    function handelClick(){  //here Navigate and useNavigate are used differently be careful
+        if(!isloggedin){
+            navigate("/login")
+        }
+        else{
+            navigate("/profile")
+        }
+    }
     return(
         <header>
         <Link className="site-logo" to="/">#VanLife</Link>
@@ -16,12 +45,16 @@ export default function Navbar(){
             <NavLink to="about"
                 className={({isActive})=>(isActive? 'nav-active': null)}
             >About</NavLink>
-            <Link to="login" className="login-link">
-                <img 
+            <img 
                     src={imageUrl}
                     className="login-icon"
-                />
-            </Link>
+                    style={
+                        {
+                            marginRight: "0.9rem",
+                        }
+                    }
+                    onClick={handelClick}
+            />
             </nav>
         </header>
     )

@@ -1,5 +1,5 @@
 import React from "react"
-import { Navigate, useLocation} from "react-router-dom"
+import { Navigate, redirect, useLocation, useNavigate} from "react-router-dom"
 import { loginUser } from "../api"
 import userImg from "../Assets/images/profile-general.png"
 import useAuth from "../Context/useAuth"
@@ -12,6 +12,11 @@ export default function Login() {
     const val=useLocation(); //to get that message "you need to login first"
     const {userData, setuserData, isloggedin, setisloggedin} = useAuth() // to acces all auth global variables and methods
     // console.log(val)
+    const navigate=useNavigate()
+    // if(isloggedin){
+    //     navigate("/profile")
+    // }
+
     function handleSubmit(e) {
         e.preventDefault()
         setStatus("submitting")
@@ -59,21 +64,22 @@ export default function Login() {
         }
       }, [loginState]);
 
-    if(isloggedin===true && loginState===null){
-        // localStorage.setItem("UserAuth", false)
-        const user=userData.user.name
-        const email=userData.user.email
-        return(
-            <div className="login-container">
-                <br /><br /><br />
-                <img src={userImg} alt="" className="profile-img"/>
-                <h1>{`${user}'s VanLife`}</h1>
-                <span className="email-host">{email}</span>
-                <br /> <br />
-                <button className="button-profile" onClick={()=>{handelClick()}}>Do you wish to Logout?</button>
-            </div>
-        )
-    }
+    // if(isloggedin===true && loginState===null){
+    //     redirect("/profile")
+    //     localStorage.setItem("UserAuth", false)
+    //     const user=userData.user.name
+    //     const email=userData.user.email
+    //     return(
+    //         <div className="login-container">
+    //             <br /><br /><br />
+    //             <img src={userImg} alt="" className="profile-img"/>
+    //             <h1>{`${user}'s VanLife`}</h1>
+    //             <span className="email-host">{email}</span>
+    //             <br /> <br />
+    //             <button className="button-profile" onClick={()=>{handelClick()}}>Do you wish to Logout?</button>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div className="login-container">
@@ -103,7 +109,7 @@ export default function Login() {
                     {/* {localStorage.setItem("username", loginState.user.name )}
                     {localStorage.setItem("email", loginState.user.email )} */}
                     <h5 className="red-none">Welcome {userData.user.name}, redirecting you to host page..</h5>
-                    {delayedNavigation && <Navigate to="/host"/>}
+                    {delayedNavigation && navigate("/host", {replace:false})}
                     </>
                 )}
                 <button 

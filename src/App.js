@@ -19,6 +19,7 @@ import VanC from './Components/Host/vansC'
 import Details from './Components/Host/details';
 import Pricing from './Components/Host/pricing';
 import Photos from './Components/Host/photos';
+import Profile from './Components/profile';
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
           <Route path='vans' element={<Vans/>} />
           <Route path='vans/:id' element={<Van/>} />
           <Route path='login' element={<Login/>} />
+          <Route path='profile' element={<Profile/>} />
           <Route path='host' element={<Layout2/>}>
             <Route index element={<Dashboard/>} />
             <Route path='income' element={<Income/>} />
